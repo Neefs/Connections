@@ -22,11 +22,7 @@
     ["Body", "Arm", "Leg","Hand", "Head"],
     ["Currency", "Dollar", "Euro", "Yen", "Ruble"],
     ["Presidents", "Washington", "Hoover", "Taylor", "Jackson"],
-    ["Cities", "Madrid", "Sydney", "Paris", "Tokyo"],
+    ["Cities", "Madrid", "Sydney", "Paris", "Tokyo"]
 
-
-
-
-
-    
+ 
 ]

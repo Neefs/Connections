@@ -5,6 +5,8 @@
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.Arrays;
+import java.util.Collections;
 
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
@@ -17,7 +19,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 
 public class MainGui {
-    Connections game = new Connections();
+    Connections game = new Connections(Connections.getGroups());
     JFrame frame;
 
     JPanel topPanel;
@@ -30,6 +32,7 @@ public class MainGui {
     JButton shuffle, deselect, submit;
 
     public MainGui() {
+        
         frame = new JFrame("Connections");
         frame.setSize(680, 560);
         frame.setResizable(false);
@@ -43,27 +46,62 @@ public class MainGui {
         gamePanel = new JPanel();
         gamePanel.setLayout(new GridLayout(4, 4, 10, 10));
         gameButtons = new JToggleButton[16];
+        String[] words = game.getAllWords();
         for (int i = 0; i < gameButtons.length; i++) {
             gameButtons[i] = new JToggleButton();
-            gameButtons[i].setText("pump");
+            gameButtons[i].setText(words[i]);
             gamePanel.add(gameButtons[i]);
             gameButtons[i].addActionListener(e -> {
-                game.buttonPress(e, gameButtons);
+                JToggleButton buttonPressed = (JToggleButton) e.getSource();
+                int selected = 0;
+                for (JToggleButton button : gameButtons) {
+                    if (button.isSelected()) {
+                        selected++;
+                    }
+                }
+                if (selected > 4) {
+                    buttonPressed.setSelected(false);
+                }
+                System.out.println(buttonPressed.getText());
             });
         }
-        for (JToggleButton button : gameButtons){
-            button = new JToggleButton();
-            button.setText("pump");
-            gamePanel.add(button);
-           button.addActionListener(e -> {
-                game.buttonPress(e, gameButtons);
-            });
-        }
+        
 
         bottomPanel = new JPanel();
         shuffle = new JButton("Shuffle");
+        shuffle.addActionListener(e -> {
+            for (JToggleButton button : gameButtons) {
+                System.out.print(button.getText());
+            }
+            Collections.shuffle(Arrays.asList(gameButtons));
+            System.out.println("");
+            for (JToggleButton button : gameButtons) {
+                System.out.print(button.getText());
+            }
+            System.out.println("");
+
+            gamePanel.removeAll();
+            for (JToggleButton button : gameButtons) {
+                gamePanel.add(button);
+            }
+            gamePanel.revalidate();
+        });
+
+
         deselect = new JButton("Deselect");
+        deselect.addActionListener(e -> {
+            for (JToggleButton button : gameButtons) {
+                button.setSelected(false);
+            }
+        });
+
         submit = new JButton("Submit");
+        submit.addActionListener(e -> {
+            for (String s : game.getAllWords()) {
+                System.out.println(s);
+            }
+        });
+
         bottomPanel.add(shuffle);
         bottomPanel.add(deselect);
         bottomPanel.add(submit);
