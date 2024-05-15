@@ -1,0 +1,4 @@
+/*  
+The main game class that handles
+all logic and holds the array data
+*/
