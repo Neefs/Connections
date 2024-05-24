@@ -5,6 +5,7 @@
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -62,7 +63,6 @@ public class MainGui {
                 if (selected > 4) {
                     buttonPressed.setSelected(false);
                 }
-                System.out.println(buttonPressed.getText());
             });
         }
         
@@ -97,9 +97,15 @@ public class MainGui {
 
         submit = new JButton("Submit");
         submit.addActionListener(e -> {
-            for (String s : game.getAllWords()) {
-                System.out.println(s);
+            // move to top and change color to show group and disable
+            ArrayList<String> groups = new ArrayList<String>();
+            for (JToggleButton button : gameButtons) {
+                if (button.isSelected()) {
+                    groups.add(button.getText());
+                }
             }
+            String groupName = game.checkGroup(groups.toArray(new String[groups.size()]));
+            System.out.println(groupName);
         });
 
         bottomPanel.add(shuffle);

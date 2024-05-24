@@ -46,6 +46,30 @@ public class Connections {
         return allWords;
     }
 
+    public String checkGroup(String[] group) {
+        
+        for (String[] g : groups) {
+            String groupName = g[0];
+            g = g.clone();
+            g = Arrays.copyOfRange(g, 1, g.length);
+            Arrays.sort(g);
+            Arrays.sort(group);
+            for (int i = 0; i < g.length; i++) {
+                System.out.print(g[i] + " ");
+            }
+            System.out.println();
+            for (int i = 0; i < group.length; i++) {
+                System.out.print(group[i] + " ");
+            }
+            if (Arrays.equals(g, group)) {
+                return groupName;
+            }
+        }
+        return null;
+    }
+
+
+
     public static ArrayList<String[]> getGroups() {
         ArrayList<String[]> returnedGroups = new ArrayList<String[]>();
         JSONParser parser = new JSONParser();
@@ -68,16 +92,17 @@ public class Connections {
     }
 
     private static ArrayList<String[]> pick4(ArrayList<String[]> groups) {
-        //fix dupe issue
         ArrayList<String[]> pickedGroups = new ArrayList<String[]>();
         
-        for (int i = 0; i < 4; i++) {
+        while(pickedGroups.size() < 4) {
             int random = (int) (Math.random() * groups.size());
             String[] g = groups.get(random);
-            
-            pickedGroups.add(g);
-            
+            if(!pickedGroups.contains(g)) { 
+                pickedGroups.add(g);
+            }
         }
+
+
         for(int j = 0; j < 4; j++) {
             String[] group = pickedGroups.get(j);
             for(int i = 0; i < group.length; i++) {
