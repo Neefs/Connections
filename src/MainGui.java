@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
@@ -80,11 +81,7 @@ public class MainGui {
             }
             System.out.println("");
 
-            gamePanel.removeAll();
-            for (JToggleButton button : gameButtons) {
-                gamePanel.add(button);
-            }
-            gamePanel.revalidate();
+            updateButtons();
         });
 
 
@@ -105,7 +102,27 @@ public class MainGui {
                 }
             }
             String groupName = game.checkGroup(groups.toArray(new String[groups.size()]));
+            if (groupName == null) {
+                return;
+            }
             System.out.println(groupName);
+            Arrays.sort(gameButtons, new Comparator<JToggleButton>() {
+                public int compare(JToggleButton b1, JToggleButton b2) {  
+                    return Boolean.compare(!b1.isSelected(), !b2.isSelected());
+                }
+            });
+            for (JToggleButton button : gameButtons) {
+                if (button.isSelected()) {
+                    button.setText("<html><center>"+button.getText()+ "<br>" + groupName+"</center></html>");
+                    button.setToolTipText(groupName);
+                    button.setEnabled(false);
+                    button.setSelected(false);
+                    
+                }
+            }
+            updateButtons();
+
+
         });
 
         bottomPanel.add(shuffle);
@@ -122,33 +139,41 @@ public class MainGui {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    public static void runGUI() {
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        new MainGui();
+    private void updateButtons(){
+        gamePanel.removeAll();
+        for (JToggleButton button : gameButtons) {
+            gamePanel.add(button);
+        }
+        gamePanel.revalidate();
     }
 
 
 
 
-    // private static void runGUI() {
-    //     try {
-    //         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    //     } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-    //             | UnsupportedLookAndFeelException e) {
-    //         e.printStackTrace();
-    //         JFrame.setDefaultLookAndFeelDecorated(true);
-    //     }
+
+
+
+
+
+
+
+
+    // public static void runGUI() {
+    //     JFrame.setDefaultLookAndFeelDecorated(true);
     //     new MainGui();
     // }
+
+
+
+
+    public static void runGUI() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+                | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+            JFrame.setDefaultLookAndFeelDecorated(true);
+        }
+        new MainGui();
+    }
 }

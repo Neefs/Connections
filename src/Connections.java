@@ -54,13 +54,6 @@ public class Connections {
             g = Arrays.copyOfRange(g, 1, g.length);
             Arrays.sort(g);
             Arrays.sort(group);
-            for (int i = 0; i < g.length; i++) {
-                System.out.print(g[i] + " ");
-            }
-            System.out.println();
-            for (int i = 0; i < group.length; i++) {
-                System.out.print(group[i] + " ");
-            }
             if (Arrays.equals(g, group)) {
                 return groupName;
             }
