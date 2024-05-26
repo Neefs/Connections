@@ -22,7 +22,11 @@
     ["Body", "Arm", "Leg","Hand", "Head"],
     ["Currency", "Dollar", "Euro", "Yen", "Ruble"],
     ["Presidents", "Washington", "Hoover", "Taylor", "Jackson"],
-    ["Cities", "Madrid", "Sydney", "Paris", "Tokyo"]
-
- 
+    ["Cities", "Madrid", "Sydney", "Paris", "Tokyo"],
+    ["Models", "Rosie Huntington", "Cara Delevigne", "Marilyn Monroe", "Gigi Hadid"],
+    ["Valorant", "Ascent", "Reyna", "Kuronami", "Smite"],
+    ["Software Companies", "Microsoft", "Apple", "Twilio", "Nutanix"],
+    ["Basketball", "NBA", "Lebron", "Timberwolves", "Jordan"],
+    ["Video Games", "Valorant", "Quake", "Orgeon Trail", "Zelda"],
+    ["Phrases", "Raining cats & dogs", "Bite the bullet", "Break a leg", "Hit the hay"]
 ]
