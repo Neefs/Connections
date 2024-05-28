@@ -16,7 +16,6 @@ public class MainGUI {
         exit = new JButton("Exit");
 
         anagram.setEnabled(false);
-        wordle.setEnabled(false);
 
         anagram.addActionListener(e -> {
             frame.dispose();
@@ -29,6 +28,7 @@ public class MainGUI {
 
         wordle.addActionListener(e -> {
             frame.dispose();
+            new Wordle.Wordle();
         });
 
         exit.addActionListener(e -> {
