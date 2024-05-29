@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.LineBorder;
+
+import utils.WordChecker;
+
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -23,6 +26,7 @@ public class Wordle {
     ArrayList<JLabel[]> groups;
     JLabel[] activeGroup;
     JLabel activeLabel;
+    int activeLabelIndex;
 
     public Wordle(){
         frame = new JFrame("Wordle");
@@ -54,21 +58,67 @@ public class Wordle {
             }
             groups.add(group);
         }
+        activeGroup = groups.get(0);
+        activeLabelIndex = 0;
+        activeLabel = activeGroup[activeLabelIndex];
 
         frame.add(topPanel);
         frame.add(gamePanel);
 
         frame.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    System.out.println("UP");
-                } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    System.out.println("DOWN");
-                } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    System.out.println("LEFT");
-                } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    System.out.println("RIGHT");
+                int key = e.getKeyCode();
+                if (key == KeyEvent.VK_ENTER) {
+                    String word = "";
+                    for (JLabel label : activeGroup){
+                        word += label.getText();
+                    }
+                    if (word.length() != 5){
+                        System.out.println("Word must be 5 characters long");
+                        //show to user eventually
+                        return;
+                    }
+                    boolean validWord = WordChecker.isValidWord(word);
+                    System.out.println("Word: " + word);
+                    System.out.println("Valid word: " + validWord);
+
+                    if (!validWord){
+                        System.out.println("Invalid word");
+                        //show to user eventually
+                        return;
+                    }
+                    if (activeGroup == groups.get(5)){
+                        System.out.println("Game over");
+                        //show to user eventually
+                        frame.removeKeyListener(this);
+                        return;
+                    } else{
+                        activeGroup = groups.get(groups.indexOf(activeGroup) + 1);
+                        activeLabel = activeGroup[0];
+                        activeLabelIndex = 0;
+                    }
                 }
+                if (key == KeyEvent.VK_BACK_SPACE) {
+                    System.out.println("Backspace pressed");
+                    activeLabel.setText("");
+                    if (activeLabelIndex > 0){
+                        activeLabelIndex--;
+                        activeLabel = activeGroup[activeLabelIndex];
+                    } else{
+                        activeLabel = activeGroup[0];
+                        activeLabelIndex = 0;
+                    }
+                }
+                if ((key >= 65 && key <= 90) || (key >= 97 && key <= 122)) {
+                    char letter = (char) key;
+                    activeLabel.setText(Character.toString(letter));
+                    if (activeLabelIndex < 4){
+                        activeLabelIndex++;
+                        activeLabel = activeGroup[activeLabelIndex];
+                    }
+                }
+                
+
             }
         
         });
