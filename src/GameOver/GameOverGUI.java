@@ -1,4 +1,4 @@
-package WinGUI;
+package GameOver;
 
 public class GameOverGUI(){
     

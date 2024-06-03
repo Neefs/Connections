@@ -1,3 +1,4 @@
+package Main;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,10 +16,9 @@ public class MainGUI {
         wordle = new JButton("Wordle");
         exit = new JButton("Exit");
 
-        anagram.setEnabled(false);
-
         anagram.addActionListener(e -> {
             frame.dispose();
+            new Anagram.Anagrams();
         });
 
         connections.addActionListener(e -> {

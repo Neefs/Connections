@@ -1,7 +1,7 @@
 package Anagram;
 
 import java.util.*;
-import util.WordChecker;
+import utils.WordChecker;
 
 public class logic {
     public static void main(String[] args){

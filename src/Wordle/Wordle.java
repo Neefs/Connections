@@ -12,6 +12,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.LineBorder;
 
+import Main.YouWin;
 import utils.WordChecker;
 
 import java.awt.Color;
@@ -97,6 +98,7 @@ public class Wordle {
                     }else{
                         word = word.toLowerCase();
                         gameWord = gameWord.toLowerCase();
+                        
                         Map<String, ArrayList<Integer>> result = checkWord(word, gameWord);
                         int[] checkedLetters = new int[5];
                         for (int i = 0; i < 5; i++){
@@ -120,6 +122,15 @@ public class Wordle {
                         }
                         System.out.println("Right place: " + result.get("rightPlace"));
                         System.out.println("Wrong place: " + result.get("wrongPlace"));
+
+                        if (word.equals(gameWord)){
+                            System.out.println("You win!");
+                            //show to user eventually
+                            frame.removeKeyListener(this);
+                            YouWin gui = new YouWin();
+                            frame.dispose();
+                            return;
+                        }
 
                         
                     }
