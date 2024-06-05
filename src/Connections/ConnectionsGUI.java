@@ -20,6 +20,8 @@ import javax.swing.JToggleButton;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import Main.YouWin;
+
 
 public class ConnectionsGUI {
     Connections game = new Connections(Connections.getGroups());
@@ -122,6 +124,9 @@ public class ConnectionsGUI {
                 }
             }
             updateButtons();
+            if (game.isGameOver()) {
+                new YouWin();
+            }
 
 
         });

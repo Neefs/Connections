@@ -12,6 +12,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.LineBorder;
 
+import Main.YouLose;
 import Main.YouWin;
 import utils.WordChecker;
 
@@ -42,7 +43,7 @@ public class Wordle {
         frame.setVisible(true);
 
         gameWord = pickWord();
-        System.out.println("Game word: " + gameWord);
+        //System.out.println("Game word: " + gameWord);
 
         topPanel = new JPanel();
         gamePanel = new JPanel();
@@ -139,6 +140,8 @@ public class Wordle {
                         System.out.println("Game over");
                         //show to user eventually
                         frame.removeKeyListener(this);
+                        frame.dispose();
+                        new YouLose();
                         return;
                     } else{
                         activeGroup = groups.get(groups.indexOf(activeGroup) + 1);

@@ -20,6 +20,7 @@ import org.json.simple.parser.ParseException;
 
 public class Connections {
     private ArrayList<String[]> groups;
+    private int correctGroups = 0;
     
     /*
      * @pre groups.length() >= 4
@@ -56,10 +57,15 @@ public class Connections {
             Arrays.sort(g);
             Arrays.sort(group);
             if (Arrays.equals(g, group)) {
+                correctGroups++;
                 return groupName;
             }
         }
         return null;
+    }
+
+    public boolean isGameOver() {
+        return correctGroups == 4;
     }
 
 
