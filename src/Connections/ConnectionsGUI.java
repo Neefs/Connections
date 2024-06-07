@@ -125,6 +125,7 @@ public class ConnectionsGUI {
             }
             updateButtons();
             if (game.isGameOver()) {
+                frame.dispose();
                 new YouWin();
             }
 

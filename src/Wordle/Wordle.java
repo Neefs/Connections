@@ -2,7 +2,6 @@ package Wordle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.JFrame;
@@ -126,9 +125,8 @@ public class Wordle {
 
                         if (word.equals(gameWord)){
                             System.out.println("You win!");
-                            //show to user eventually
                             frame.removeKeyListener(this);
-                            YouWin gui = new YouWin();
+                            new YouWin();
                             frame.dispose();
                             return;
                         }

@@ -103,6 +103,7 @@ public class Anagrams implements ActionListener{
             mistakeLabel.setText("MISTAKES: " + mistakes);
             guessField.setEditable(false);
             submitButton.setEnabled(false);
+            frame.dispose();
             new YouLose();
         }else if(!(gameObj.countMatchingCharacters(userArray, givenLetters) && WordChecker.isValidWord(userGuess) && !gameObj.used(userGuess, usedWords))){
             resultLabel.setText("CANT USE THIS WORD!");
@@ -122,11 +123,5 @@ public class Anagrams implements ActionListener{
 
 
 
-   public static void main(String[] args) {
-       javax.swing.SwingUtilities.invokeLater(new Runnable() {
-           public void run(){
-               runGUI();
-           }
-       });
-   }
+
 }
